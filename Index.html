@@ -1,105 +1,491 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
-    <style>
-        html { scroll-behavior: smooth; }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background-color: #222;
-            color: #fff;
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: #faf9f7;
+      color: #2a2825;
+    }
 
-        .name {
-            font-size: 1.4rem;
-            font-weight: bold;
-        }
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 3rem;
+      border-bottom: 0.5px solid #e4e1db;
+    }
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4AA3A2;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      line-height: 1.05;
+      color: #1e1c1a;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: #4AA3A2;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: #7a7570;
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-group { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #4AA3A2;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      border-radius: 2px;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #7a7570;
+      border: 0.5px solid #c8c3bc;
+      padding: 12px 28px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      border-radius: 2px;
+    }
 
-        nav a {
-            margin-left: 25px;
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
+    /* ── SECTIONS ── */
+    .section { padding: 4rem 3rem; border-top: 0.5px solid #e4e1db; }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: #4AA3A2;
+      font-weight: 400;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: #1e1c1a;
+    }
 
-        nav a:hover {
-            color: #00bcd4;
-        }
-    </style>
+    /* ── PROJETS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: #fff;
+      border: 0.5px solid #e4e1db;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .project-img {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-img.c1 { background: #eef7f7; }
+    .project-img.c2 { background: #eef3ff; }
+    .project-img.c3 { background: #f0faf0; }
+    .project-img i { font-size: 40px; }
+    .project-img i.c1i { color: #4AA3A2; }
+    .project-img i.c2i { color: #2a6de8; }
+    .project-img i.c3i { color: #27a85f; }
+    .accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+    .accent-bar.t { background: #4AA3A2; }
+    .accent-bar.b { background: #2a6de8; }
+    .accent-bar.g { background: #27a85f; }
+    .project-body { padding: 1.2rem; }
+    .project-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 400; }
+    .project-tag.t { color: #4AA3A2; }
+    .project-tag.b { color: #2a6de8; }
+    .project-tag.g { color: #27a85f; }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #1e1c1a;
+      margin-bottom: 0.5rem;
+    }
+    .project-desc { font-size: 12px; color: #9b9590; line-height: 1.7; }
+
+    /* ── COMPÉTENCES ── */
+    .skills-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill-pill {
+      border: 0.5px solid #d6d1cb;
+      border-radius: 2px;
+      padding: 6px 16px;
+      font-size: 12px;
+      color: #6a6560;
+      letter-spacing: 0.04em;
+      background: transparent;
+    }
+
+    /* ── EXPÉRIENCE PROFESSIONNELLE ── */
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .exp-card {
+      background: #fff;
+      border: 0.5px solid #e4e1db;
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #4AA3A2;
+    }
+    .exp-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4AA3A2;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #1e1c1a;
+      line-height: 1.25;
+    }
+    .exp-footer {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 0.5px solid #f0ede8;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .exp-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8eded; }
+    .exp-date { font-size: 11px; color: #b5afa8; letter-spacing: 0.08em; }
+
+    /* ── VEILLE TECHNOLOGIQUE ── */
+    .veille-section {
+      background: #1a2e2e;
+      padding: 4rem 3rem;
+      border-top: 0.5px solid #e4e1db;
+    }
+    .veille-section .section-num { color: #4AA3A2; }
+    .veille-section .section-title { color: #f0f7f7; }
+    .veille-card {
+      background: #223636;
+      border: 0.5px solid #2a4a4a;
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      max-width: 480px;
+    }
+    .veille-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #4AA3A2;
+    }
+    .veille-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .veille-badge {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      padding: 3px 10px;
+      border-radius: 2px;
+      background: rgba(74,163,162,0.15);
+      color: #4AA3A2;
+    }
+    .veille-date { font-size: 11px; color: #4a6a6a; letter-spacing: 0.04em; }
+    .veille-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #d0eded;
+      line-height: 1.3;
+    }
+    .veille-summary { font-size: 13px; color: #6a9090; line-height: 1.8; }
+    .veille-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    .veille-source { font-size: 11px; color: #4a6a6a; letter-spacing: 0.06em; }
+    .veille-link {
+      font-size: 11px;
+      color: #4AA3A2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .contact-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: #1e1c1a;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .contact-text span { color: #4AA3A2; font-style: italic; }
+    .contact-email {
+      font-size: 14px;
+      color: #7a7570;
+      text-decoration: none;
+      border-bottom: 1px solid #4AA3A2;
+      padding-bottom: 2px;
+    }
+    .contact-btns { display: flex; flex-direction: column; gap: 1rem; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: #7a7570;
+      text-decoration: none;
+      padding: 0.8rem 1rem;
+      border: 0.5px solid #e4e1db;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .social-link.gh i { color: #2a2825; }
+    .social-link.cv i { color: #4AA3A2; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 3rem;
+      border-top: 0.5px solid #e4e1db;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #faf9f7;
+    }
+    .footer-copy { font-size: 12px; color: #b5afa8; }
+    .available-badge {
+      font-size: 11px;
+      color: #4AA3A2;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .available-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4AA3A2;
+      display: inline-block;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.5rem; }
+      .hero-name { font-size: 44px; }
+      .section { padding: 3rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .contact-block { grid-template-columns: 1fr; }
+      .veille-section { padding: 3rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="name">REATE Kelyan Yanis</div>
-        <nav>
-            <a href="#apropos">À propos de moi</a>
-            <a href="#projets">Mes projets</a>
-            <a href="#experiences">Mes expériences</a>
-            <a href="#vtech">Veille technologique</a>
-        </nav>
-    </header>
 
-    <div style="width:100%; height:250px; background:#ccc; display:flex; justify-content:center; align-items:center;">
-        <!-- Zone pour votre image -->
-        <p> Image style techno ou photo de moi jsp encore</p>
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <p class="hero-tag">— Developpeur Web</p>
+    <h1 class="hero-name">Créer des<br><em>expériences</em><br>mémorables</h1>
+    <p class="hero-desc">Je met toute mes connaissance et mon imagination afin de créer des sites a coupé le souffle.</p>
+    <div class="btn-group">
+      <button class="btn-primary">Voir mes projets</button>
+      <button class="btn-secondary">Me contacter</button>
     </div>
+  </div>
 
-    <section id="apropos" style="background:#e0e0e0; padding:20px 30px; width:100%; border-radius:0; font-size:1rem; line-height:1.6;"">
-        <p>
-           Texte de presentation
-           Nom Prenom Age
-           BTS SIO SLAM 2ème anné
-           Pq le bts SIO
-           blablablabla
+  <!-- ── 01 PROJETS ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Projets sélectionnés</h2>
+    </div>
+    <div class="projects-grid">
 
-        </p>
-    </section>
+      <div class="project-card">
+        <div class="project-img c1">
+          <i class="ti ti-layout-dashboard c1i"></i>
+          <div class="accent-bar t"></div>
+        </div>
+        <div class="project-body">
+          <p class="project-tag t">Design produit</p>
+          <h3 class="project-title">Dashboard analytique</h3>
+          <p class="project-desc">Refonte complète de l'interface de visualisation de données pour une fintech parisienne.</p>
+        </div>
+      </div>
 
-    <!-- Espace blanc pour les projets -->
-    <section style="background:#ffffff; padding:20px 30px; width:100%; font-size:1rem; line-height:1.6; margin-top:0;">
-        <h2 id="projets">Mes projets</h2>
-        <p>
-            Zone pour le projet 
-            1) PPE 1
-            é) PPE 2 
-            3 projet perso
-            4) blablablabla
-        </p>
-    </section>
+      <div class="project-card">
+        <div class="project-img c2">
+          <i class="ti ti-shopping-bag c2i"></i>
+          <div class="accent-bar b"></div>
+        </div>
+        <div class="project-body">
+          <p class="project-tag b">E-commerce</p>
+          <h3 class="project-title">Boutique en ligne</h3>
+          <p class="project-desc">Expérience d'achat minimaliste pour une marque de mode sustainable à Lyon.</p>
+        </div>
+      </div>
 
-    <!-- Rectangle gris pour les expériences -->
-    <section style="background:#e0e0e0; padding:20px 30px; width:100%; font-size:1rem; line-height:1.6; margin-top:0;">
-        <h2 id="experiences">Mes expériences professionnelles</h2>
-        <p>Mes stages
-            Stage 1
-            blablablabla
-            Stage 2
-            blablablabla
-        </p>
-    </section>
+      <div class="project-card">
+        <div class="project-img c3">
+          <i class="ti ti-heart c3i"></i>
+          <div class="accent-bar g"></div>
+        </div>
+        <div class="project-body">
+          <p class="project-tag g">Application mobile</p>
+          <h3 class="project-title">App bien-être</h3>
+          <p class="project-desc">Conception UX d'une application de méditation et de suivi du sommeil.</p>
+        </div>
+      </div>
 
-    <!-- Espace blanc pour la veille technologique -->
-    <section id="vtech" style="background:#ffffff; padding:40px 30px; width:100%; font-size:1rem; line-height:1.6; margin-top:0;">
-        <h2>Mes veilles technologiques</h2>
-        <p>
-            Le sujet de ma/mes veilles techno
-            Outils de veille techno
-            Sujet de veille techno
-            
-        </p>
-    </section>
+    </div>
+  </section>
+
+  <!-- ── 02 COMPÉTENCES ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Compétences</h2>
+    </div>
+    <div class="skills-row">
+      <span class="skill-pill">HTML</span>
+      <span class="skill-pill">CSS</span>
+      <span class="skill-pill">JavaScript</span>
+      <span class="skill-pill">SQL</span>
+      <span class="skill-pill">ReactJS</span>
+      <span class="skill-pill">NodeJS</span>
+      <span class="skill-pill">PHP</span>
+    </div>
+  </section>
+
+  <!-- ── 03 EXPÉRIENCE PROFESSIONNELLE ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Expérience professionnelle</h2>
+    </div>
+    <div class="exp-grid">
+
+      <div class="exp-card">
+        <p class="exp-label">Stage</p>
+        <h3 class="exp-title">Stage 1ère année<br>BTS SIO</h3>
+        <div class="exp-footer">
+          <div class="exp-dot"></div>
+          <span class="exp-date">1ère année · BTS SIO</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <p class="exp-label">Stage</p>
+        <h3 class="exp-title">Stage 2ème année<br>BTS SIO SLAM</h3>
+        <div class="exp-footer">
+          <div class="exp-dot"></div>
+          <span class="exp-date">2ème année · BTS SIO SLAM</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 04 VEILLE TECHNOLOGIQUE ── -->
+  <section class="veille-section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Veille technologique</h2>
+    </div>
+    <div class="veille-card">
+      <div class="veille-card-top">
+        <span class="veille-badge">IA & Sport</span>
+        <span class="veille-date">Mai 2026</span>
+      </div>
+      <h3 class="veille-title">L'IA au service de la performance sportive</h3>
+      <p class="veille-summary">L'intelligence artificielle révolutionne êu à peu le monde du sport : analyse en temps réel des mouvements, prédiction des blessures, optimisation des entraînements et personnalisation des stratégies tactiques. </p>
+      <div class="veille-footer-row">
+        <a href="#" class="veille-link"><i class="ti ti-arrow-up-right"></i> Lire</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 CONTACT ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-block">
+      <div>
+        <p class="contact-text">Travaillons<br><span>ensemble</span></p>
+        <!-- Remplace par ton adresse email -->
+        <a href="mailto:ton@email.fr" class="contact-email">Reatekelyan@gmail.com</a>
+      </div>
+      <div class="contact-btns">
+        <!-- Remplace # par l'URL de ton GitHub -->
+        <a href="https://github.com/KelyanRT" class="social-link gh"><i class="ti ti-brand-github"></i> GitHub</a>
+        <!-- Remplace # par le lien vers ton CV (ex: Google Drive, PDF hébergé) -->
+        <a href="#" class="social-link cv"><i class="ti ti-file-text"></i> Télécharger mon CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="footer-copy">© 2026 Kelyan Yanis REATE</span>
+  </footer>
 
 </body>
 </html>
